@@ -1,12 +1,21 @@
 const field = document.getElementById('field');
-const len = 25;
+const rows = 7;
+const cols = 7;
+const numOfCells = rows * cols;
+const numOfBombs = 8;
+const itemSize = 30;
 
 const generateField = () => {
-    for (let i = 0; i < len; i++) {
+    field.style.width = (itemSize * cols) + 'px';
+    field.style.height = (itemSize * rows) + 'px';
+    for (let i = 0; i < numOfCells; i++) {
         const cell = document.createElement('div');
         cell.classList.add('item');
         cell.classList.add('closed');
         cell.dataset.count = i;
+        cell.style.width = itemSize + 'px';
+        cell.style.height = itemSize + 'px';
+        cell.style.lineHeight = itemSize + 'px';
         field.appendChild(cell);
     }
 }
@@ -25,11 +34,8 @@ const setNumberOfBomb = (cellNum) => {
 }
 
 const setField = (cellNum) => {
-    const rows = 5;
-    const cols = 5;
-    const numOfBombs = 5;
     let arr = [];
-    for (let i = 0; i < len; i++) {
+    for (let i = 0; i < numOfCells; i++) {
         if (i < numOfBombs) {
             arr.push('bomb');
         } else {
@@ -60,10 +66,22 @@ const setField = (cellNum) => {
 
 const getNeighbours = (cellNum) => {
     const elems = document.getElementsByClassName('item');
-    const rightElem = (cellNum+1) % 5 === 0 ? null : cellNum + 1;
-    const leftElem = (cellNum) % 5 === 0 ? null : cellNum - 1;
-    const topElems = cellNum < 5 ? null : [leftElem !== null ? cellNum - 6 : null, rightElem !== null ? cellNum - 4 : null, cellNum - 5];
-    const bottomElems = cellNum > 19 ? null : [leftElem !== null ? cellNum + 4 : null, rightElem !== null ? cellNum + 6 : null, cellNum + 5];
+    const rightElem = (cellNum + 1) % cols === 0 ? null : cellNum + 1;
+    const leftElem = (cellNum) % cols === 0 ? null : cellNum - 1;
+    const topElems = (cellNum < cols) ?
+        null :
+        [
+            leftElem !== null ?
+            cellNum - (cols + 1) : null, rightElem !== null ? cellNum - (cols - 1) : null,
+            cellNum - cols
+        ];
+    const bottomElems = cellNum > (numOfCells - cols - 1) ?
+        null :
+        [
+            leftElem !== null ? cellNum + (cols - 1) : null,
+            rightElem !== null ? cellNum + (cols + 1) : null,
+            cellNum + cols
+        ];
 
     const topElemsFiltered = (topElems !== null) ? topElems.filter(item => item !== null) : null;
     const bottomElemsFiltered = (bottomElems !== null) ? bottomElems.filter(item => item !== null) : null;
