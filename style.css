@@ -2,24 +2,43 @@
     box-sizing: border-box;
 }
 
+.menu__links {
+    padding-bottom: 0.5em;
+}
+.menu__item {
+    display: inline-block;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+}
+
+.field__container {
+    display: none;
+}
+
 .field {
     display: flex;
     flex-wrap: wrap;
+    border: 1px solid black;
 }
 
-.item {
+.elem {
     border: 1px solid black;
     text-align: center;
-}
-
-.empty {
-    background-color: white;
-}
-
-.bomb {
-    background-color: indianred;
+    background-color: #eee;
+    font-weight: bold;
 }
 
 .closed {
-    background-color: #ddd;
+    background-color: #ccc;
+}
+
+.result {
+    padding-top: 0.5em;
+}
+
+.new-game {
+    margin-left: 0.5em;
 }

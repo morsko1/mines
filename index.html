@@ -6,7 +6,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="field" class="field"></div>
+    <div id="menu__links" class="menu__links">
+        <button onclick="goToMenu()">Menu</button>
+        <button onclick="location.reload()">Restart</button>
+    </div>
+    <div id="field__container" class="field__container">
+        <div id="field" class="field"></div>
+    </div>
+    <div id="menu" class="menu">
+        <h3>Mines</h3>
+        <p>choose a level:</p>
+        <div class="menu__item">
+            <button onclick="init('easy')">easy</button>
+        </div>
+        <div class="menu__item">
+            <button onclick="init('medium')">medium</button>
+        </div>
+        <div class="menu__item">
+            <button onclick="init('hard')">hard</button>
+        </div>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
